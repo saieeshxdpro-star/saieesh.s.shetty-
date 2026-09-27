@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>saieesh.s.shetty | Creative Developer & Tech Innovator</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA8C2C',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glass-card {
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.1);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased selection:bg-gold selection:text-black">
+
+    <!-- Three.js Particle Background Container -->
+    <div id="three-container"></div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-gold/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#hero" class="text-xl font-bold tracking-wider text-white flex items-center gap-2 group">
+                <span class="w-3 h-3 rounded-full bg-gold inline-block group-hover:scale-125 transition-transform"></span>
+                SAIEESH<span class="text-gold">.DEV</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-gold transition-colors">About</a>
+                <a href="#skills" class="hover:text-gold transition-colors">Expertise</a>
+                <a href="#projects" class="hover:text-gold transition-colors">Projects</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-gold focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-gold/10 px-6 py-4 flex flex-col gap-4">
+            <a href="#about" class="mobile-link text-gray-300 hover:text-gold transition-colors">About</a>
+            <a href="#skills" class="mobile-link text-gray-300 hover:text-gold transition-colors">Expertise</a>
+            <a href="#projects" class="mobile-link text-gray-300 hover:text-gold transition-colors">Projects</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative px-6 pt-20">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-white glow-text">saieesh.s.shetty</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-10 h-12 flex items-center justify-center">
+                <span id="typewriter" class="border-r-2 border-gold pr-1"></span>
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gold text-black font-semibold hover:bg-gold-light transition-all shadow-xl shadow-gold/20 flex items-center justify-center gap-2 group">
+                    Explore Projects <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden md:block text-gold/60">
+            <a href="#about"><i data-lucide="chevron-down" class="w-6 h-6"></i></a>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-32 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">About <span class="text-gold">Me</span></h2>
+                <div class="w-20 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-5 glass-card p-8 rounded-2xl relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-gold to-transparent rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                    <div class="relative z-10 space-y-4">
+                        <div class="w-16 h-16 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6">
+                            <i data-lucide="code-2" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Engineering with Purpose</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            I bridge the gap between complex system architecture and emotive user interfaces. Every line of code is meticulously crafted to deliver blazing speed, structural robustness, and striking visual aesthetics.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:col-span-7 glass-card p-8 md:p-12 rounded-2xl space-y-6">
+                    <h3 class="text-2xl font-semibold text-gold">Crafting Immersive Digital Realities</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        I am saieesh.s.shetty, an elite full-stack developer, 3D web artist, and UX/UI designer driven by an obsession with state-of-the-art web technology. My work explores the intersection of high-performance backend infrastructure and mesmerizing WebGL/Three.js interactive graphics.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Whether architecting scalable cloud solutions, fine-tuning micro-interactions, or designing futuristic spatial interfaces, my core philosophy centers on relentless innovation, zero compromise on performance, and unforgettable user experiences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills / Expertise Grid -->
+    <section id="skills" class="py-32 px-6 relative bg-black/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Core <span class="text-gold">Expertise</span></h2>
+                <div class="w-20 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill 1 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="terminal" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Full-Stack Dev</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Building scalable web apps using React, Next.js, Node.js, Python, and robust database architectures.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">React</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Node.js</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">TypeScript</span>
+                    </div>
+                </div>
+                <!-- Skill 2 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="box" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">3D Web Graphics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Crafting breathtaking spatial environments and particle interactions with Three.js, WebGL, and GLSL shaders.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Three.js</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">WebGL</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Shaders</span>
+                    </div>
+                </div>
+                <!-- Skill 3 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="layout" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">UI/UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Designing intuitive, glassmorphic interfaces and design systems with Figma focusing on user psychology.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Figma</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Tailwind</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">UX Research</span>
+                    </div>
+                </div>
+                <!-- Skill 4 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="cpu" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Problem Solving</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Optimizing complex algorithms, memory management, and system bottlenecks for lightning-fast performance.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Algorithms</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Optimization</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gold/10 text-gold border border-gold/20">Architecture</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-32 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Featured <span class="text-gold">Projects</span></h2>
+                <div class="w-20 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project: The Voidmaw -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col group hover:border-gold/50 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-gold/20 via-black to-gold/10 relative p-6 flex items-end">
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-gold/30 text-gold text-xs">WebGL / 3D</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors">The Voidmaw</h3>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-6">
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            An interactive spatial WebGL experience exploring deep cosmic anomaly simulations and dynamic visual environments.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">Three.js</span>
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">WebGL</span>
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">JavaScript</span>
+                        </div>
+                        <div class="flex items-center gap-4 pt-4 border-t border-gold/10">
+                            <a href="https://saieeshxdpro-star.github.io/The-Voidmaw/" target="_blank" class="flex items-center gap-1.5 text-sm font-semibold text-gold hover:underline"><i data-lucide="external-link" class="w-4 h-4"></i> Live Demo</a>
+                            <a href="https://github.com/saieeshxdpro-star/The-Voidmaw" target="_blank" class="flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i> Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 1: Living Pulsar -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col group hover:border-gold/50 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-gold/20 via-black to-gold/10 relative p-6 flex items-end">
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-gold/30 text-gold text-xs">WebGL / Interactive</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors">Living Pulsar</h3>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-6">
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            An immersive cosmic simulation experience visualizing dynamic pulsar behaviors and stellar interactions in real-time WebGL.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">Three.js</span>
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">WebGL</span>
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">JavaScript</span>
+                        </div>
+                        <div class="flex items-center gap-4 pt-4 border-t border-gold/10">
+                            <a href="https://saieeshxdpro-star.github.io/living-pulsar/" target="_blank" class="flex items-center gap-1.5 text-sm font-semibold text-gold hover:underline"><i data-lucide="external-link" class="w-4 h-4"></i> Live Demo</a>
+                            <a href="https://github.com/saieeshxdpro-star/living-pulsar" target="_blank" class="flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i> Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2: Singularity -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col group hover:border-gold/50 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-gold/20 via-black to-gold/10 relative p-6 flex items-end">
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-gold/30 text-gold text-xs">WebGL / 3D</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors">Singularity</h3>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-6">
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            An interactive 3D viewport experience built with Three.js featuring orbital controls, custom optics, and particle simulations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">Three.js</span>
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">WebGL</span>
+                            <span class="px-2.5 py-1 rounded-md bg-black border border-gold/20 text-gold">JavaScript</span>
+                        </div>
+                        <div class="flex items-center gap-4 pt-4 border-t border-gold/10">
+                            <a href="https://saieeshxdpro-star.github.io/singularity-0.2/" target="_blank" class="flex items-center gap-1.5 text-sm font-semibold text-gold hover:underline"><i data-lucide="external-link" class="w-4 h-4"></i> Live Demo</a>
+                            <a href="https://github.com/saieeshxdpro-star/singularity-0.2" target="_blank" class="flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i> Source</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gold/10 text-center text-xs text-gray-500">
+        <p>&copy; 2026 saieesh.s.shetty. All rights reserved. Built with passion & Three.js.</p>
+    </footer>
+
+    <!-- Three.js Particle Swarm Background Script -->
+    <script type="module">
+        import * as THREE from 'three';
+
+        // CONFIG
+        const COUNT = 15000;
+        const SPEED_MULT = 1;
+
+        // SETUP
+        const container = document.getElementById('three-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.015);
+        
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, 0, 90);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // MOUSE INTERACTION
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.05;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.05;
+        });
+
+        // SWARM OBJECTS
+        const dummy = new THREE.Object3D();
+        const color = new THREE.Color();
+        const target = new THREE.Vector3();
+        
+        const geometry = new THREE.TetrahedronGeometry(0.2);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        
+        const instancedMesh = new THREE.InstancedMesh(geometry, material, COUNT);
+        instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+        scene.add(instancedMesh);
+
+        // DATA ARRAYS
+        const positions = [];
+        for(let i = 0; i < COUNT; i++) {
+            positions.push(new THREE.Vector3((Math.random() - 0.5) * 120, (Math.random() - 0.5) * 120, (Math.random() - 0.5) * 120));
+        }
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime() * SPEED_MULT;
+
+            // Smooth mouse follow
+            targetX += (mouseX - targetX) * 0.05;
+            targetY += (mouseY - targetY) * 0.05;
+            scene.rotation.y = targetX * 0.01;
+            scene.rotation.x = targetY * 0.01;
+            scene.rotation.z = time * 0.03;
+
+            const nHead = COUNT * 0.085;
+            const nHair = COUNT * 0.145;
+            const nTorso = COUNT * 0.365;
+            const nArm = COUNT * 0.50;
+            const nThigh = COUNT * 0.655;
+            const nShin = COUNT * 0.755;
+            const nSeat = COUNT * 0.865;
+            const nLegs = COUNT * 0.985;
+
+            for(let i = 0; i < COUNT; i++) {
+                const s1 = Math.sin(i * 12.9898 + 1.0) * 43758.5453;
+                const r1 = s1 - Math.floor(s1);
+                const s2 = Math.sin(i * 78.233 + 2.0) * 24634.6345;
+                const r2 = s2 - Math.floor(s2);
+                const s3 = Math.sin(i * 39.425 + 3.0) * 15731.743;
+                const r3 = s3 - Math.floor(s3);
+                const side = (i & 1) * 2 - 1;
+
+                const gold = 2.399963;
+                let px = 0, py = 0, pz = 0, mat = 0;
+
+                if (i < nHead) {
+                    const f = (i + 0.5) / Math.max(1, nHead);
+                    const yy = 1 - 2 * f;
+                    const rr = Math.sqrt(Math.max(0.0001, 1 - yy * yy));
+                    const a = gold * i;
+                    px = Math.cos(a) * rr * 4.9;
+                    py = 30.5 + yy * 5.5 + Math.sin(time * 1.1) * 0.25;
+                    pz = 0.4 + Math.sin(a) * rr * 4.6;
+                    mat = 1;
+                } else if (i < nHair) {
+                    const yy = -0.35 + 1.35 * r1;
+                    const rr = Math.sqrt(Math.max(0.0001, 1 - yy * yy));
+                    const aa = yy > 0.5 ? r2 * 6.2831 : 2.36 + r2 * 4.71;
+                    px = Math.cos(aa) * rr * 5.4;
+                    py = 30.5 + yy * 6.0;
+                    pz = 0.4 + Math.sin(aa) * rr * 5.1;
+                    mat = 2;
+                } else if (i < nTorso) {
+                    const f = (i - nHair) / Math.max(1, nTorso - nHair);
+                    const a = gold * i;
+                    const rx = (5.6 + 1.5 * Math.sin(f * 2.7)) * (1 - 0.62 * Math.max(0, (f - 0.86) / 0.14));
+                    px = Math.cos(a) * rx;
+                    py = 0.5 + f * 25.5;
+                    pz = Math.sin(a) * 3.4 - 1.2;
+                    mat = 0;
+                } else if (i < nArm) {
+                    const t = (i - nTorso) / Math.max(1, nArm - nTorso);
+                    const a = gold * i;
+                    const type = t < 0.5 ? 1 : 0;
+                    const u = type === 1 ? t * 2 : (t - 0.5) * 2;
+                    const rad = type === 1 ? 3.0 - 0.6 * u : 2.5 - 0.4 * u;
+                    px = side * (7.5 + u) + Math.cos(a) * rad;
+                    py = (type === 1 ? 24.5 - 13.5 * u : 11.0 - 8.0 * u) + Math.sin(a) * rad;
+                    pz = (type === 1 ? -0.5 + 3.0 * u : 2.5 + 12.0 * u);
+                    mat = 0;
+                } else if (i < nThigh) {
+                    const u = (i - nArm) / Math.max(1, nThigh - nArm);
+                    const a = gold * i;
+                    const rad = 4.3 - 0.9 * u;
+                    px = side * (4.2 + u) + Math.cos(a) * rad;
+                    py = -0.3 - 0.8 * u;
+                    pz = -1.0 + u * 17.5 + Math.sin(a) * rad;
+                    mat = 0;
+                } else {
+                    const rad = Math.sqrt(Math.max(0.0001, r1)) * 35.0;
+                    const a = r2 * 6.2831;
+                    px = Math.cos(a) * rad;
+                    py = -20.4 + Math.sin(time * 0.9 + r3 * 6.2831) * 0.3;
+                    pz = Math.sin(a) * rad + 4.0;
+                    mat = 3;
+                }
+
+                const hue = mat === 1 ? 0.12 : (mat === 2 ? 0.10 : (mat === 3 ? 0.14 : 0.11));
+                const lum = 0.3 + 0.3 * Math.sin(time + i);
+
+                target.set(px, py, pz);
+                positions[i].lerp(target, 0.1);
+                
+                dummy.position.copy(positions[i]);
+                dummy.updateMatrix();
+                instancedMesh.setMatrixAt(i, dummy.matrix);
+                
+                color.setHSL(hue, 0.7, lum);
+                instancedMesh.setColorAt(i, color);
+            }
+
+            instancedMesh.instanceMatrix.needsUpdate = true;
+            instancedMesh.instanceColor.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+
+    <!-- UI Interaction Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Typewriter Effect
+        const words = ["Creative Developer", "3D Web Artist", "UX/UI Designer", "Tech Innovator"];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typewriter').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typewriter').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+
+        typingEffect();
+    </script>
+</body>
+</html>
